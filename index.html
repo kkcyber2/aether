@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aether Basin — a procedural caldera you can fly</title>
+<meta name="description" content="A real-time WebGL caldera generated from layered value noise. Fly a procedural alpine basin, land on six waypoints, and move the sun.">
+<meta name="author" content="KK (Conan Sultan Khan)">
+<meta name="theme-color" content="#0a0d12">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aether Basin — a procedural caldera you can fly">
+<meta property="og:description" content="Real-time WebGL terrain from layered value noise. No models loaded, no textures — the basin is generated.">
+<meta property="og:site_name" content="Aether Basin">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<canvas id="world" aria-label="Interactive 3D view of the Aether caldera"></canvas>
+
+<div id="labels" aria-hidden="true"></div>
+
+<header class="hud hud-top">
+  <div class="brand">
+    <span class="mark">AE</span>
+    <span class="brand-text">Aether Basin<small>caldera survey · 61°N</small></span>
+  </div>
+  <nav class="hud-nav" aria-label="Sections">
+    <a href="#waypoints">01. Waypoints</a>
+    <a href="#notes">02. Survey notes</a>
+  </nav>
+</header>
+
+<aside class="hud hud-panel" aria-label="Instrumentation">
+  <div class="read"><span class="k">surface</span><span class="v" id="r-surface">—</span></div>
+  <div class="read"><span class="k">altitude</span><span class="v" id="r-alt">—</span></div>
+  <div class="read"><span class="k">bearing</span><span class="v" id="r-bearing">—</span></div>
+  <div class="read"><span class="k">nearest</span><span class="v" id="r-nearest">—</span></div>
+  <div class="rule"></div>
+  <label class="ctl">
+    <span class="k">sun <output id="sun-out">42°</output></span>
+    <input id="sun" type="range" min="4" max="86" value="42" step="1" aria-label="Sun elevation in degrees">
+  </label>
+</aside>
+
+<p class="hint" id="hint">drag to orbit · scroll to climb · click a marker to land</p>
+
+<main>
+  <section id="waypoints" class="panel">
+    <p class="eyebrow">// 01</p>
+    <h1>Six places<br>worth landing.</h1>
+    <p class="lede">Everything below exists in the heightfield. Positions are polar coordinates resolved against
+      the generated surface, so a marker can never float off the ground.</p>
+    <ul class="wp" id="wp-list"></ul>
+  </section>
+
+  <section id="notes" class="panel">
+    <p class="eyebrow">// 02</p>
+    <h2>How it is built</h2>
+    <div class="cols">
+      <div>
+        <h3>Terrain</h3>
+        <p>A radial profile gives the basin its shape: resurgent dome, steep wall, rim crest, outer apron.
+          Ridged fractal noise is masked to the wall so the plain stays readable, and a breach is cut into
+          the rim where meltwater leaves.</p>
+      </div>
+      <div>
+        <h3>Surface</h3>
+        <p>Rock, scree, snow and ash are chosen per vertex from height and slope, so a cliff face is rock
+          while the shelf above it holds snow. The lake sits at a fixed level and the floor is carved
+          beneath it.</p>
+      </div>
+      <div>
+        <h3>Cost</h3>
+        <p>One draw call for the terrain, one for water, one instanced call for the treeline. No model
+          files, no image textures — the whole world is arithmetic and a palette.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built by KK (Conan Sultan Khan) · <a href="https://github.com/kkcyber2">github.com/kkcyber2</a></p>
+    <p class="muted">Terrain, camera and shading written from scratch on top of Three.js.</p>
+  </footer>
+</main>
+
+<noscript><p class="fallback">This piece needs JavaScript and WebGL. The survey notes below still describe the site.</p></noscript>
+<script src="assets/vendor/three.min.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

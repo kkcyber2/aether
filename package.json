@@ -1,0 +1,24 @@
+{
+  "name": "aether",
+  "version": "1.0.0",
+  "description": "Real-time interactive 3D terrain world — procedural alpine basin you fly through, with time-of-day and landable waypoints.",
+  "license": "MIT",
+  "author": {
+    "name": "KK (Conan Sultan Khan)",
+    "email": "kkdev9715@gmail.com",
+    "url": "https://github.com/kkcyber2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kkcyber2/aether.git"
+  },
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node tools/serve.js",
+    "test": "node --test tests/"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

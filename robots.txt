@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kkcyber2.github.io/aether/sitemap.xml
